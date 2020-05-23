@@ -26,12 +26,12 @@ public class Task3 {
     //быть достаточно общим, чтобы передать все возможные случаи, когда "zip" может
     //произойти в строке.
 
-    public static int findZip(String str){
+    public static int findZip(String strok){
         int n=-1;
-        for (int i=0;i<str.length()-2;i++){
-            if (str.charAt(i)=='z'&& str.charAt(i+1)=='i'&& str.charAt(i+2)=='p'&& n==1)
+        for (int i=0;i<strok.length()-2;i++){
+            if (strok.charAt(i)=='z'&& strok.charAt(i+1)=='i'&& strok.charAt(i+2)=='p'&& n==1)
                 n=i-1;
-            if (str.charAt(i)=='z'&& str.charAt(i+1)=='i'&& str.charAt(i+2)=='p'&& n==-1)
+            if (strok.charAt(i)=='z'&& strok.charAt(i+1)=='i'&& strok.charAt(i+2)=='p'&& n==-1)
                 n=1;
 
         }
@@ -84,8 +84,12 @@ public class Task3 {
     // шестнадцатеричным кодом
 
     public static boolean isValidHexCode(String code) {
+
         if (code.length() > 7) return false;
-        else return code.matches("#[a-fA-F0-9]+");
+
+        else if (code.matches("#[a-fA-F0-9]+")) return true;
+
+        else return false;
     }
     //6
     // Напишите функцию, которая возвращает true, если два массива имеют одинаковое
@@ -108,6 +112,7 @@ public class Task3 {
         if (count == count1)
             same = true;
         return same;
+
     }
 
     //7
@@ -136,18 +141,18 @@ public class Task3 {
     // последовательных нулей в двоичной строке.
 
     public static String longestZero(String n){
-        StringBuilder sum = new StringBuilder();
+        String sum = "";
         String count = "";
         for (int i = 0; i < n.length()-1; i++){
             if(n.charAt(i) == '0')
-                sum.append("0");
+                sum+="0";
             else {
                     if (count.length()<sum.length())
-                    count = sum.toString();
-                sum = new StringBuilder();
+                    count = sum;
+                sum = "";
             }
         }
-        if (count.length()<sum.length())count= sum.toString();
+        if (count.length()<sum.length())count=sum;
         return count;
     }
 
@@ -177,5 +182,6 @@ public class Task3 {
         if ( x == 0 || y == 0 || z == 0 )
             return false;
         return  ( x*x+y*y==z*z || x*x==y*y+z*z || x*x+z*z == y*y);
+
     }
 }

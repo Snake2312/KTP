@@ -19,26 +19,24 @@ public class Task4 {
     public static String Bessy(int n, int k , String txt){
         String[] text = txt.split(" ");
         txt="";
-        StringBuilder finaltxt= new StringBuilder();
-        StringBuilder txtBuilder = new StringBuilder(txt);
+        String finaltxt="";
         for (int i = 0; i < n; i++) {
-            if (txtBuilder.length() + text[i].length() > k) {
-                finaltxt = new StringBuilder(finaltxt.toString().trim() + "\r\n" + text[i] + " ");
-                txtBuilder = new StringBuilder(text[i]);
+            if (txt.length() + text[i].length() > k) {
+                finaltxt = finaltxt.trim() + "\r\n" + text[i] + " ";
+                txt = text[i];
             } else {
-                finaltxt.append(text[i]).append(" ");
-                txtBuilder.append(text[i]);
+                finaltxt += text[i] + " ";
+                txt += text[i];
             }
         }
-        txt = txtBuilder.toString();
-        return finaltxt.toString().trim();
+        return finaltxt.trim();
     }
 
     //2. Напишите функцию, которая группирует строку в кластер скобок.
     //Каждый кластер должен быть сбалансирован.
 
     public static String[] split(String str) {
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         int f = 0;
         int i = 0;
         while (str.length() > 0) {
@@ -52,7 +50,7 @@ public class Task4 {
             }
             i++;
         }
-        return list.toArray(new String[0]);
+        return list.toArray(new String[list.size()]);
     }
 
 
@@ -63,10 +61,8 @@ public class Task4 {
     public static String toCamelCase(String str) {
         for (int i = 1; i < str.length(); i++) {
             if (str.charAt(i) == '_')
-                str = str.substring(0, i) + str.substring(i + 1, i + 2).toUpperCase() + str.substring(i + 2);
-
+                str = str.substring(0, i) + str.substring(i + 1, i + 2).toUpperCase() + str.substring(i + 2, str.length());
         }
-
         return str;
     }
 
@@ -93,7 +89,6 @@ public class Task4 {
             sum += (work[1] - 17) * work[2] * work[3];
         return ('$' + String.valueOf(sum));
     }
-
 
     // 5. Индекс массы тела (ИМТ) определяется путем измерения вашего веса
     // в килограммах и деления на квадрат вашего роста в метрах.
@@ -147,23 +142,23 @@ public class Task4 {
     public static String toStarShorthand(String str) {
         int count = 1;
         char let = str.charAt(0);
-        StringBuilder newStr = new StringBuilder();
+        String newStr = "";
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) != let) {
                 if (count != 1)
-                    newStr.append(let).append("*").append(count);
+                    newStr += let + "*" + count;
                 else
-                    newStr.append(let);
+                    newStr += let;
                 let = str.charAt(i);
                 count = 1;
             } else
                 count++;
         }
         if (count != 1)
-            newStr.append(let).append("*").append(count);
+            newStr += let + "*" + count;
         else
-            newStr.append(let);
-        return newStr.toString();
+            newStr += let;
+        return newStr;
     }
 
 
@@ -176,17 +171,18 @@ public class Task4 {
         str1 = str1.substring(str1.lastIndexOf(" ") + 1);
         str2 = str2.substring(str2.lastIndexOf(" ") + 1);
         String let = "aeiouyAEIOUY";
-        StringBuilder res1 = new StringBuilder();
-        StringBuilder res2 = new StringBuilder();
+        String res1 = "", res2 = "";
         for (int i = 0; i < str1.length(); i++) {
             if (let.indexOf(str1.charAt(i)) != -1)
-                res1.append(str1.charAt(i));
+                res1 += str1.charAt(i);
         }
         for (int i = 0; i < str2.length(); i++) {
             if (let.indexOf(str2.charAt(i)) != -1)
-                res2.append(str2.charAt(i));
+                res2 += str2.charAt(i);
         }
-        return res1.toString().toLowerCase().equals(res2.toString().toLowerCase());
+        if (res1.toLowerCase().equals(res2.toLowerCase())) return true;
+        else
+            return false;
     }
 
     //9. Создайте функцию, которая принимает два целых числа и возвращает true,

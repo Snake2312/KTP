@@ -154,11 +154,11 @@ public class Task5 {
     противном случае-false.*/
 
     public static boolean validateCard(long cardNum) {
-        String str="";
+        StringBuilder str= new StringBuilder();
         if ( Long.toString(cardNum).length()>= 14 && Long.toString(cardNum).length() <= 19) {
             // step 1
             long lastNum = cardNum%10;
-            StringBuffer cardNumStr = new StringBuffer(Long.toString(cardNum/=10));
+            StringBuilder cardNumStr = new StringBuilder(Long.toString(cardNum/=10));
             // step 2
             cardNumStr.reverse();
             // step 3
@@ -167,11 +167,11 @@ public class Task5 {
                     int c =Character.getNumericValue(cardNumStr.charAt(i))*2;
                     if(c>9){
                         String buf = Integer.toString(c);
-                        str += Character.getNumericValue(buf.charAt(0))+Character.getNumericValue(buf.charAt(1));
+                        str.append(Character.getNumericValue(buf.charAt(0)) + Character.getNumericValue(buf.charAt(1)));
                     }
-                    else str+=c;
+                    else str.append(c);
                 }
-                else str+=cardNumStr.charAt(i);
+                else str.append(cardNumStr.charAt(i));
             }
             System.out.println(str);
           int sum=0;
@@ -179,8 +179,7 @@ public class Task5 {
                 sum+=Character.getNumericValue(str.charAt(i));
             System.out.println(sum);
             System.out.println(lastNum);
-            if (lastNum==10-sum%10)
-                return true;
+            return lastNum == 10 - sum % 10;
         }
         return false;
     }
@@ -594,20 +593,5 @@ public class Task5 {
         return res;
     }
 
-
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        System.out.println("№ 1.1 " + encrypt("Hello"));
-        System.out.println("№ 1.2 " + dycrypt(new int[]{72, 33, -73, 84, -12, -3, 13, -13, -68}));
-        System.out.println("№ 2 " + canMove("Rook", "A8", "H8"));
-        System.out.println("№ 3 " + canComplite("buthl", "beautiful"));
-        System.out.println("№ 4 " + sumDigProd(new int[]{1, 2, 3, 4, 5, 6}));
-        System.out.println("№ 5 " + sameVowelGroup(new String[]{"toe", "ocelot", "maniac"}));
-        System.out.println("№ 6 " + validateCard(1234567890123452L));
-        System.out.println("№ 7.1 " + numToEng(108));
-        System.out.println("№ 7.2 " + numToRus(108));
-        System.out.println("№ 8 " + getSha256Hash("password123"));
-        System.out.println("№ 9 " + correctTitle("TYRION LANNISTER, HAND OF THE QUEEN."));
-        System.out.println("№ 10 \n" + haxLattice(19));
-    }
 
 }
